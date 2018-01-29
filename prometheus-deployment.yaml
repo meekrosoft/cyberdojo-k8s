@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: prometheus
+  name: prometheus
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: prometheus
+    spec:
+      containers:
+      - image: cyberdojo/prometheus
+        name: cyber-dojo-prometheus
+        resources: {}
+      restartPolicy: Always
+status: {}

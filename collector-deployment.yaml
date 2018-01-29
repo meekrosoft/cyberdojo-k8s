@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: collector
+  name: collector
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: collector
+    spec:
+      containers:
+      - image: cyberdojo/collector
+        name: cyber-dojo-collector
+        resources:
+          limits:
+            memory: "1073741824"
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: collector-claim0
+      restartPolicy: Always
+      volumes:
+      - name: collector-claim0
+        persistentVolumeClaim:
+          claimName: collector-claim0
+status: {}

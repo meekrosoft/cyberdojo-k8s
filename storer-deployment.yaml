@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: storer
+  name: storer
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: storer
+    spec:
+      containers:
+      - env:
+        - name: CYBER_DOJO_KATAS_ROOT
+        image: cyberdojo/storer
+        name: cyber-dojo-storer
+        ports:
+        - containerPort: 4577
+        resources:
+          limits:
+            memory: "2147483648"
+        volumeMounts:
+        - mountPath: /tmp
+          name: storer-tmpfs0
+      restartPolicy: Always
+      volumes:
+      - emptyDir:
+          medium: Memory
+        name: storer-tmpfs0
+status: {}

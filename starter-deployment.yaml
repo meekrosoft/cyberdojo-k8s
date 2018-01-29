@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file docker-compose.yml convert
+    kompose.version: 1.7.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: starter
+  name: starter
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: starter
+    spec:
+      containers:
+      - env:
+        - name: CYBER_DOJO_START_POINTS_ROOT
+          value: /app/start_points
+        image: cyberdojo/starter
+        name: cyber-dojo-starter
+        resources:
+          limits:
+            memory: "52428800"
+        volumeMounts:
+        - mountPath: /app/start-points/languages
+          name: commander-languages
+          readOnly: true
+        - mountPath: /app/start-points/exercises
+          name: commander-exercises
+          readOnly: true
+        - mountPath: /app/start-points/custom
+          name: commander-custom
+          readOnly: true
+        - mountPath: /tmp
+          name: starter-tmpfs0
+      restartPolicy: Always
+      volumes:
+      - name: commander-languages
+        persistentVolumeClaim:
+          claimName: commander-languages
+          readOnly: true
+      - name: commander-exercises
+        persistentVolumeClaim:
+          claimName: commander-exercises
+          readOnly: true
+      - name: commander-custom
+        persistentVolumeClaim:
+          claimName: commander-custom
+          readOnly: true
+      - emptyDir:
+          medium: Memory
+        name: starter-tmpfs0
+status: {}
