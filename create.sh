@@ -15,4 +15,4 @@ kubectl create -f starter-service.yaml
 kubectl create -f web-deployment.yaml
 kubectl create -f web-service.yaml
 kubectl create -f nginx-deployment.yaml
-kubectl create -f nginx-pod.yaml
+kubectl create -f nginx-service.yaml
