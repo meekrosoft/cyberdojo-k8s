@@ -1,13 +1,9 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose --file docker-compose.yml convert
-    kompose.version: 1.7.0 ()
-  creationTimestamp: null
+  name: storer
   labels:
     io.kompose.service: storer
-  name: storer
 spec:
   replicas: 1
   strategy: {}
@@ -20,6 +16,7 @@ spec:
       containers:
       - env:
         - name: CYBER_DOJO_KATAS_ROOT
+          value: /tmp/cyber-dojo
         image: cyberdojo/storer
         name: cyber-dojo-storer
         ports:

@@ -9,7 +9,7 @@ metadata:
     io.kompose.service: web
   name: web
 spec:
-  clusterIP: None
+  type: ClusterIP
   ports:
   - name: headless
     port: 3000

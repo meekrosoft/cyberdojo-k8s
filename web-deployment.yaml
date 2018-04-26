@@ -21,6 +21,7 @@ spec:
       - env:
         - name: CYBER_DOJO_HOME
         image: cyberdojo/web
+        imagePullPolicy: Always
         name: cyber-dojo-web
         resources:
           limits:
