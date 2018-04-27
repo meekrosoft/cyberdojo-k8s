@@ -16,7 +16,7 @@ spec:
       containers:
       - env:
         - name: CYBER_DOJO_KATAS_ROOT
-          value: /tmp/cyber-dojo
+          value: /usr/src/cyber-dojo
         image: cyberdojo/storer
         name: cyber-dojo-storer
         ports:
@@ -25,11 +25,13 @@ spec:
           limits:
             memory: "2147483648"
         volumeMounts:
-        - mountPath: /tmp
-          name: storer-tmpfs0
+        - mountPath: /usr/src/cyber-dojo
+          name: storer-data
       restartPolicy: Always
       volumes:
-      - emptyDir:
-          medium: Memory
-        name: storer-tmpfs0
+      - name: storer-data
+        persistentVolumeClaim:
+          claimName: storer-data
+      securityContext:
+        fsGroup: 19661
 status: {}
