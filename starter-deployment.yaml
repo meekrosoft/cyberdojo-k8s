@@ -22,7 +22,7 @@ spec:
       - env:
         - name: CYBER_DOJO_START_POINTS_ROOT
           value: /app/start_points
-        image: cyberdojo/starter_fat
+        image: cyberdojo/starter-fat
         imagePullPolicy: Always
         name: cyber-dojo-starter-fat
         resources:

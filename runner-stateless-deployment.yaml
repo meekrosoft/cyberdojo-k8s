@@ -14,27 +14,28 @@ spec:
     type: Recreate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         io.kompose.service: runner-stateless
     spec:
       containers:
-      - image: cyberdojo/runner_stateless
-        name: cyber-dojo-runner-stateless
+      - name: cyber-dojo-runner-stateless
+        image: cyberdojo/runner-stateless
         resources:
           limits:
             memory: "2147483648"
         volumeMounts:
         - mountPath: /var/run/docker.sock
-          name: runner-stateless-claim0
+          name: docker-socket
         - mountPath: /tmp
           name: runner-stateless-tmpfs0
       restartPolicy: Always
       volumes:
-      - name: runner-stateless-claim0
-        persistentVolumeClaim:
-          claimName: runner-stateless-claim0
-      - emptyDir:
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock
+          type: File
+      - name: runner-stateless-tmpfs0
+        emptyDir:
           medium: Memory
-        name: runner-stateless-tmpfs0
+
 status: {}

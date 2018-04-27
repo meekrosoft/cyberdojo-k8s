@@ -18,3 +18,5 @@ kubectl create -f nginx-deployment.yaml
 kubectl create -f nginx-service.yaml
 kubectl create -f storer-deployment.yaml
 kubectl create -f storer-service.yaml
+kubectl create -f runner-stateless-deployment.yaml
+kubectl create -f runner-stateless-service.yaml

@@ -9,11 +9,11 @@ metadata:
     io.kompose.service: runner-stateless
   name: runner-stateless
 spec:
-  clusterIP: None
+  type: ClusterIP
   ports:
-  - name: headless
-    port: 55555
-    targetPort: 0
+  - name: runner-port
+    port: 4597
+    targetPort: 4597
   selector:
     io.kompose.service: runner-stateless
 status:
