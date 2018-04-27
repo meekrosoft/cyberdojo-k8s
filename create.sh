@@ -22,3 +22,5 @@ kubectl create -f runner-stateless-deployment.yaml
 kubectl create -f runner-stateless-service.yaml
 kubectl create -f differ-deployment.yaml
 kubectl create -f differ-service.yaml
+kubectl create -f zipper-deployment.yaml
+kubectl create -f zipper-service.yaml
