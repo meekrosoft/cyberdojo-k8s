@@ -24,3 +24,11 @@ kubectl create -f differ-deployment.yaml
 kubectl create -f differ-service.yaml
 kubectl create -f zipper-deployment.yaml
 kubectl create -f zipper-service.yaml
+
+# Monitoring
+kubectl create -f prometheus-deployment.yaml
+kubectl create -f prometheus-service.yaml
+
+kubectl create -f grafana-data-pvc.yaml
+kubectl create -f grafana-deployment.yaml
+kubectl create -f grafana-service.yaml

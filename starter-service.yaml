@@ -7,7 +7,7 @@ spec:
     io.kompose.service: starter
   type: ClusterIP
   ports:
-  - name: serviceport
+  - name: starter-port
     port: 4527
     targetPort: 4527
 status:
