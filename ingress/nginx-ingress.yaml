@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cyber-dojo-nginx
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: k8s.cyber-dojo.org
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 80
+  tls:
+  - secretName: custom-tls-cert
+    hosts:
+    - k8s.cyber-dojo.org

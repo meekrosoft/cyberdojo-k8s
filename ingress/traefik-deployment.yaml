@@ -1,0 +1,33 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: traefik-ingress-controller
+  namespace: kube-system
+  labels:
+    k8s-app: traefik-ingress-lb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: traefik-ingress-lb
+  template:
+    metadata:
+      labels:
+        k8s-app: traefik-ingress-lb
+        name: traefik-ingress-lb
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      terminationGracePeriodSeconds: 60
+      containers:
+      - image: traefik
+        name: traefik-ingress-lb
+        args:
+        - --web
+        - --web.metrics
+        - --web.metrics.prometheus
+        - --api
+        - --logLevel=INFO
+        - --kubernetes
+        - --entryPoints=Name:http-redirect Address::80 Redirect.EntryPoint:https-proto
+        - --entryPoints=Name:https-proto Address::443 TLS
+        - --defaultentrypoints=https,http
