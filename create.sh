@@ -1,6 +1,5 @@
 #/bin/bash
 
-set -x
 
 action=create
 # persistentVolumeClaim
@@ -11,10 +10,10 @@ done
 
 for file in *deployment.yaml
 do
-    echo kubectl $action -f $file
+    kubectl $action -f $file
 done
 
 for file in *service.yaml
 do
-    echo kubectl $action -f $file
+    kubectl $action -f $file
 done
