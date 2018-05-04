@@ -11,7 +11,7 @@ spec:
   replicas: {{ .Values.replicaCount.nginx }}
   selector:
     matchLabels:
-      app: {{ template "cyber-dojo.name" . }}
+      app: {{ template "cyber-dojo.name" . }}-nginx
       release: {{ .Release.Name }}
   template:
     metadata:
