@@ -11,9 +11,8 @@ spec:
   type: {{ .Values.service.nginx.type }}
   ports:
     - port: {{ .Values.service.nginx.port }}
-      targetPort: http
+      targetPort: {{ .Values.service.nginx.port }}
       protocol: TCP
-      name: http
   selector:
-    app: {{ template "cyber-dojo.name" . }}
+    app: {{ template "cyber-dojo.name" . }}-nginx
     release: {{ .Release.Name }}

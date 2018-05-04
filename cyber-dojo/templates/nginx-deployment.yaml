@@ -21,20 +21,18 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.image.nginx.repository }}:{{ .Values.image.nginx.tag }}"
+          imagePullPolicy: {{ .Values.image.nginx.pullPolicy }}
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+               path: /healthz
+               port: 8080
           resources:
-{{ toYaml .Values.resources.nginx | indent 12 }}
-    {{- with .Values.nodeSelector }}
+            limits:
+              memory: {{ .Values.resources.nginx.limits.memory }}
+            requests:
+              memory: {{ .Values.resources.nginx.requests.memory }}
