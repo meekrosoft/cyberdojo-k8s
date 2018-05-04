@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "cyber-dojo.fullname" . }}
+  labels:
+    app: {{ template "cyber-dojo.name" . }}
+    chart: {{ template "cyber-dojo.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "cyber-dojo.name" . }}
+    release: {{ .Release.Name }}
